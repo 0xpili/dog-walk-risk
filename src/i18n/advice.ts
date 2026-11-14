@@ -35,6 +35,13 @@ export const adviceCopy = {
       heavy: "Con tanto pelo, el calor le pega más: buscá horas frescas.",
       smallShort: "Los perros chicos o de pelo corto se resienten más con el frío y el piso: acortá si hace falta.",
     },
+    exercise: {
+      green: "Buen momento para correr o jugar. Llevá agua y hacé pausas.",
+      yellow: "Corré a ritmo suave y por menos tiempo. Hacé pausas a la sombra.",
+      heatRed: "Hoy no es día para correr. Mejor un juego tranquilo y corto a la sombra.",
+      cold: "Calentá unos minutos antes de correr y no lo dejes quieto mojado.",
+      coldHard: "Corré poco y por superficies sin hielo. Cuidale las patas.",
+    },
   },
   en: {
     green: {
@@ -63,6 +70,13 @@ export const adviceCopy = {
       heavy: "With a coat that thick, heat hits harder: pick cooler hours.",
       smallShort: "Small or short-coated dogs feel the cold and the pavement more: shorten it if you need to.",
     },
+    exercise: {
+      green: "A good time to run or play. Bring water and take breaks.",
+      yellow: "Run at an easy pace, and for less time. Take breaks in the shade.",
+      heatRed: "Today isn’t a day for running. A short, calm game in the shade is better.",
+      cold: "Warm up for a few minutes before running, and don’t leave them standing still while wet.",
+      coldHard: "Run only a little, and stay off ice. Watch their paws.",
+    },
   },
 } as const;
 
@@ -71,6 +85,15 @@ export type SpokenAdvice = {
   tip: string;
   dogLine: string | null;
 };
+
+type Situation = "green" | "yellow" | "heatRed" | "cold" | "coldHard";
+
+function sportSituation(result: RiskResult): Situation {
+  if (result.band === "cold") return result.roundedTempC < 0 ? "coldHard" : "cold";
+  if (result.level === "red") return "heatRed";
+  if (result.level === "yellow") return "yellow";
+  return "green";
+}
 
 /** Headline and tip for a walk, from the approved copy. */
 export function walkCopy(lang: Lang, tempC: number, level: Level, coldSide: boolean): { title: string; tip: string } {
@@ -83,18 +106,17 @@ export function walkCopy(lang: Lang, tempC: number, level: Level, coldSide: bool
   return copy.green;
 }
 
+/** Exercise card: same short headlines, exercise-specific tips. */
+export function exerciseCopy(lang: Lang, result: RiskResult): { title: string; tip: string } {
+  const copy = adviceCopy[lang];
+  const situation = sportSituation(result);
+  return { title: copy[situation].title, tip: copy.exercise[situation] };
+}
+
 export function spokenAdvice(lang: Lang, result: RiskResult, dog: DogKind): SpokenAdvice {
   const copy = adviceCopy[lang];
   const heat = result.band !== "cold";
-  const situation = !heat
-    ? result.roundedTempC < 0
-      ? copy.coldHard
-      : copy.cold
-    : result.level === "red"
-      ? copy.heatRed
-      : result.level === "yellow"
-        ? copy.yellow
-        : copy.green;
+  const situation = copy[sportSituation(result)];
 
   let dogLine: string | null = null;
   if (dog === "youngOld") dogLine = copy.dog.youngOld;

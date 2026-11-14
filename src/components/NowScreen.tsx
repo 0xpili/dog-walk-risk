@@ -1,4 +1,4 @@
-import { spokenAdvice, walkCopy } from "../i18n/advice.ts";
+import { exerciseCopy, spokenAdvice, walkCopy } from "../i18n/advice.ts";
 import type { Level } from "../data/apparentTempTable.ts";
 import {
   bestTimeLine,
@@ -31,7 +31,7 @@ type Props = {
 
 export function NowScreen({ lang, dog, placeName, sport, walk, tempC, hours, saved, onSave }: Props) {
   const text = messages(lang);
-  const sportCopy = spokenAdvice(lang, sport, "normal");
+  const sportCopy = exerciseCopy(lang, sport);
   const walkText = walkCopy(lang, tempC, walk.level, walk.coldSide);
   const dogLine = spokenAdvice(lang, sport, dog).dogLine;
   const air = formatNumber(lang, sport.airC);
