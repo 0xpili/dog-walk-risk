@@ -3,7 +3,8 @@ import { messages, sourceItems, type Lang } from "../lib/i18n.ts";
 export function SourcesScreen({ lang }: { lang: Lang }) {
   const text = messages(lang);
   const items = sourceItems(lang);
-  const groups = ["walk", "sport"] as const;
+  const groups = ["weather", "walk", "sport"] as const;
+  const groupLabel = { weather: text.groupWeather, walk: text.groupWalk, sport: text.groupSport };
 
   return (
     <div className="panel">
@@ -11,7 +12,7 @@ export function SourcesScreen({ lang }: { lang: Lang }) {
       <p className="lead">{text.sourcesLead}</p>
       {groups.map((group) => (
         <section key={group}>
-          <h3 className="group-label">{group === "walk" ? text.groupWalk : text.groupSport}</h3>
+          <h3 className="group-label">{groupLabel[group]}</h3>
           <div className="group">
             {items
               .filter((source) => source.group === group)

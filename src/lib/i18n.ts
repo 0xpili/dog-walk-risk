@@ -64,6 +64,7 @@ const ui = {
     sourcesLead: "Paseo y ejercicio no usan la misma regla. El texto de las tarjetas es nuestro.",
     sourcesNote: "No reemplaza a tu veterinario.",
     iconCredit: "Íconos de persona caminando, persona corriendo y perro: Font Awesome Free, licencia CC BY 4.0.",
+    groupWeather: "Clima",
     groupWalk: "Paseo",
     groupSport: "Ejercicio",
     bestNowGood: "Ahora es un buen momento.",
@@ -103,6 +104,7 @@ const ui = {
     sourcesLead: "Walks and exercise don’t use the same rule. The card text is ours.",
     sourcesNote: "This doesn’t replace your vet.",
     iconCredit: "Person walking, person running, and dog icons: Font Awesome Free, CC BY 4.0.",
+    groupWeather: "Weather",
     groupWalk: "Walk",
     groupSport: "Exercise",
     bestNowGood: "Now is a good time.",
@@ -116,11 +118,17 @@ export type SourceItem = {
   name: string;
   href?: string;
   detail: string;
-  group: "walk" | "sport";
+  group: "weather" | "walk" | "sport";
 };
 
 const sources: Record<Lang, readonly SourceItem[]> = {
   es: [
+    {
+      group: "weather",
+      name: "Open-Meteo",
+      href: "https://open-meteo.com/",
+      detail: "Temperatura, humedad y pronóstico por hora para tu ubicación, de servicios meteorológicos nacionales. Datos con licencia CC BY 4.0.",
+    },
     {
       group: "walk",
       name: "Tufts TACC",
@@ -140,6 +148,12 @@ const sources: Record<Lang, readonly SourceItem[]> = {
     },
   ],
   en: [
+    {
+      group: "weather",
+      name: "Open-Meteo",
+      href: "https://open-meteo.com/",
+      detail: "Temperature, humidity, and the hourly forecast for your location, from national weather services. Data under CC BY 4.0.",
+    },
     {
       group: "walk",
       name: "Tufts TACC",
