@@ -61,11 +61,10 @@ function roundHalf(value: number): number {
  * International heat floor, applied only when air temperature is above the chart.
  * Risk can rise above the 22 °C cell. It cannot fall.
  *
- * - From just over 22 °C: at least caution. Tufts TACC already scores medium dogs
- *   as potentially unsafe through the mid-70s °F, and RSPCA, Dogs Trust, AVMA
- *   and BVA treat that heat as a reason to shorten exercise.
+ * - From just over 22 °C: at least caution. Tufts TACC scores medium dogs as
+ *   potentially unsafe in the mid-70s °F; the cutoff here is the chart edge.
  * - °F + relative humidity above 150: high risk (Dr Justine Lee).
- * - At or above about 26.7 °C (80 °F): high risk (AAHA; Tufts calls this dangerous).
+ * - At or above about 26.7 °C (80 °F): high risk (AAHA; Tufts marks this as dangerous).
  */
 export function internationalHeatLevel(tempC: number, rh: number): Level {
   if (tempC >= 26.7) return "red";
@@ -77,9 +76,8 @@ export function internationalHeatLevel(tempC: number, rh: number): Level {
 
 /**
  * Cold guidance below the chart.
- * 0–4 °C: caution, aimed at small, short-coated, thin and older dogs.
- * Below 0 °C: caution for every dog.
- * At or below about −7 °C: high risk.
+ * 0–4 °C: caution. Below 0 °C: caution for every dog.
+ * At or below about −7 °C (near 20 °F on the Tufts cold scale): high risk.
  */
 export function coldLevel(roundedTempC: number): Level {
   if (roundedTempC <= -7) return "red";

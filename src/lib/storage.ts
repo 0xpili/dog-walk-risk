@@ -10,6 +10,20 @@ const PLACES = "salimos.places";
 const LAST = "salimos.last";
 const LANG = "salimos.lang";
 const THEME = "salimos.theme";
+const DOG = "salimos.dog";
+
+export type DogKind = "normal" | "brachy" | "youngOld" | "heavy" | "smallShort";
+
+const DOG_KINDS: readonly DogKind[] = ["normal", "brachy", "youngOld", "heavy", "smallShort"];
+
+export function loadDog(): DogKind {
+  const value = localStorage.getItem(DOG);
+  return DOG_KINDS.includes(value as DogKind) ? (value as DogKind) : "normal";
+}
+
+export function saveDog(dog: DogKind): void {
+  localStorage.setItem(DOG, dog);
+}
 
 function readJson<T>(key: string): T | null {
   try {

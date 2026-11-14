@@ -12,10 +12,9 @@ There is no official URL stored here. The chart is the one published with those 
 
 Above 22 °C the level never drops below the chart cell at 22 °C for the same humidity. It is raised when international guidance is stricter:
 
-- Tufts Animal Care and Condition (TACC) weather safety scale
-- Dr Justine Lee’s rule: temperature in °F plus relative humidity over 150
-- AAHA, above about 26.7 °C (80 °F)
-- RSPCA, Dogs Trust, AVMA and BVA heat advice
+- Tufts Animal Care and Condition (TACC): at least caution above 22 °C, high risk from about 26.7 °C, and high risk at or below about −7 °C
+- Dr Justine Lee’s rule: above 22 °C, temperature in °F plus relative humidity over 150 raises the level to high
+- AAHA: at or above about 26.7 °C (80 °F) is high risk
 
 Below 5 °C the heat chart does not apply. From 0 to 4 °C the app shows caution for small, short-coated, thin and older dogs. Below 0 °C the caution is for every dog. At or below about −7 °C the level is high risk.
 
