@@ -36,6 +36,11 @@ export function SourcesScreen({ lang }: { lang: Lang }) {
         </section>
       ))}
       <p className="footnote">{text.sourcesNote}</p>
+      <p className="footnote">
+        <a href="https://fontawesome.com/license/free" rel="noreferrer">
+          {text.iconCredit}
+        </a>
+      </p>
     </div>
   );
 }

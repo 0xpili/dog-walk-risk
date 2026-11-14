@@ -33,3 +33,5 @@ npm run build
 ```
 
 The interface starts in Spanish (Argentine voseo). There is an English toggle, and a light / dark toggle. Saved places stay in `localStorage` on this device.
+
+The walk and exercise icons are built from Font Awesome Free (`person-walking`, `person-running`, and `dog`), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See the [Font Awesome Free license](https://fontawesome.com/license/free).

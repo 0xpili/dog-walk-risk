@@ -11,6 +11,9 @@ describe("exercise tips", () => {
     expect(exercise.title).toBe("Mejor corto");
     expect(exercise.tip).toBe("Hoy no es día para correr. Mejor un juego tranquilo y corto a la sombra.");
     expect(exercise.tip).not.toBe(walk.tip);
+    expect(walk.tip).toBe(
+      "Hacé un paseo corto, en las horas más frescas. Caminá por la sombra y evitá el asfalto caliente.",
+    );
   });
 
   it("keeps the walk tip unchanged", () => {

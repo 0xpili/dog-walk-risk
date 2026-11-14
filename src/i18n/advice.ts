@@ -19,7 +19,7 @@ export const adviceCopy = {
     },
     heatRed: {
       title: "Mejor corto",
-      tip: "Hoy evitá correr o hacer deporte. Elegí las horas más frescas, caminá por la sombra y evitá el asfalto caliente.",
+      tip: "Hacé un paseo corto, en las horas más frescas. Caminá por la sombra y evitá el asfalto caliente.",
     },
     cold: {
       title: "Hace frío",
@@ -54,7 +54,7 @@ export const adviceCopy = {
     },
     heatRed: {
       title: "Keep it short",
-      tip: "Skip running or sport today. Pick the cooler hours, walk in the shade, and avoid hot pavement.",
+      tip: "Take a short walk, in the cooler hours. Walk in the shade and avoid hot pavement.",
     },
     cold: {
       title: "Cold",
