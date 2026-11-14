@@ -1,4 +1,4 @@
-import { exerciseCopy, spokenAdvice, walkCopy } from "../i18n/advice.ts";
+import { exerciseCopy, walkCopy } from "../i18n/advice.ts";
 import type { Level } from "../data/apparentTempTable.ts";
 import {
   bestTimeLine,
@@ -9,7 +9,6 @@ import {
   type Lang,
 } from "../lib/i18n.ts";
 import { assess, type RiskResult } from "../lib/risk.ts";
-import type { DogKind } from "../lib/storage.ts";
 import type { WalkResult } from "../lib/walk.ts";
 import { assessWalk } from "../lib/walk.ts";
 import type { WeatherHour } from "../lib/weather.ts";
@@ -19,7 +18,6 @@ const rank: Record<Level, number> = { green: 0, yellow: 1, red: 2 };
 
 type Props = {
   lang: Lang;
-  dog: DogKind;
   placeName: string;
   sport: RiskResult;
   walk: WalkResult;
@@ -29,11 +27,10 @@ type Props = {
   onSave: () => void;
 };
 
-export function NowScreen({ lang, dog, placeName, sport, walk, tempC, hours, saved, onSave }: Props) {
+export function NowScreen({ lang, placeName, sport, walk, tempC, hours, saved, onSave }: Props) {
   const text = messages(lang);
   const sportCopy = exerciseCopy(lang, sport);
   const walkText = walkCopy(lang, tempC, walk.level, walk.coldSide);
-  const dogLine = spokenAdvice(lang, sport, dog).dogLine;
   const air = formatNumber(lang, sport.airC);
   const humidity = formatNumber(lang, sport.humidity);
   const feels = sport.apparentC === null ? null : formatNumber(lang, sport.apparentC);
@@ -72,7 +69,6 @@ export function NowScreen({ lang, dog, placeName, sport, walk, tempC, hours, sav
         <ScoreCard kind="walk" label={text.paseo} level={walk.level} title={walkText.title} tip={walkText.tip} />
         <ScoreCard kind="sport" label={text.ejercicio} level={sport.level} title={sportCopy.title} tip={sportCopy.tip} />
       </div>
-      {dogLine ? <p className="dog-note">{dogLine}</p> : null}
 
       <div className={`stats ${feels === null ? "stats-two" : ""}`}>
         <p>

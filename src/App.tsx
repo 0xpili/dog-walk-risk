@@ -7,17 +7,14 @@ import { messages, type Lang } from "./lib/i18n.ts";
 import { assess } from "./lib/risk.ts";
 import { assessWalk } from "./lib/walk.ts";
 import {
-  loadDog,
   loadLang,
   loadLastPlace,
   loadPlaces,
   loadTheme,
-  saveDog,
   saveLang,
   saveLastPlace,
   savePlaces,
   saveTheme,
-  type DogKind,
   type SavedPlace,
 } from "./lib/storage.ts";
 import { fetchWeather, placeLabel, reversePlace, searchCities, type GeoHit, type WeatherReport } from "./lib/weather.ts";
@@ -36,7 +33,6 @@ export default function App() {
   const [lang, setLang] = useState<Lang>(() => loadLang());
   const [theme, setTheme] = useState<"light" | "dark">(() => loadTheme());
   const [tab, setTab] = useState<TabId>("now");
-  const [dog, setDog] = useState<DogKind>(() => loadDog());
   const [query, setQuery] = useState("");
   const [hits, setHits] = useState<GeoHit[]>([]);
   const [searchState, setSearchState] = useState<"idle" | "loading" | "empty" | "error">("idle");
@@ -146,11 +142,6 @@ export default function App() {
     const next = places.filter((item) => item.id !== id);
     setPlaces(next);
     savePlaces(next);
-  }
-
-  function pickDog(next: DogKind) {
-    setDog(next);
-    saveDog(next);
   }
 
   async function locateMe() {
@@ -293,7 +284,6 @@ export default function App() {
             {place && sport && walk ? (
               <NowScreen
                 lang={lang}
-                dog={dog}
                 placeName={place.name}
                 sport={sport}
                 walk={walk}
@@ -306,7 +296,7 @@ export default function App() {
           </div>
         ) : null}
 
-        {tab === "dog" ? <DogScreen lang={lang} dog={dog} onChange={pickDog} /> : null}
+        {tab === "dog" ? <DogScreen lang={lang} /> : null}
         {tab === "sources" ? <SourcesScreen lang={lang} /> : null}
       </main>
 

@@ -1,10 +1,9 @@
 import type { Level } from "../data/apparentTempTable.ts";
 import type { Lang } from "../lib/i18n.ts";
 import type { RiskResult } from "../lib/risk.ts";
-import type { DogKind } from "../lib/storage.ts";
 
 /**
- * All user-facing advice: headlines, tips, and dog-type lines.
+ * All user-facing advice: headlines and tips.
  * Edit this file to change the wording. Risk levels stay in src/lib/risk.ts.
  */
 export const adviceCopy = {
@@ -28,12 +27,6 @@ export const adviceCopy = {
     coldHard: {
       title: "Mucho frío",
       tip: "Salí solo lo necesario, cuidale las patas del hielo y la sal, y abrigalo.",
-    },
-    dog: {
-      brachy: "Los perros de hocico corto (bulldog, pug) sufren más el calor: sé más prudente.",
-      youngOld: "Cachorros y perros mayores se cansan antes: acortá el paseo.",
-      heavy: "Con tanto pelo, el calor le pega más: buscá horas frescas.",
-      smallShort: "Los perros chicos o de pelo corto se resienten más con el frío y el piso: acortá si hace falta.",
     },
     exercise: {
       green: "Buen momento para correr o jugar. Llevá agua y hacé pausas.",
@@ -64,12 +57,6 @@ export const adviceCopy = {
       title: "Very cold",
       tip: "Go out only as long as you need to, watch their paws for ice and salt, and put a coat on them.",
     },
-    dog: {
-      brachy: "Short-muzzled dogs (bulldogs, pugs) suffer more in the heat: be more careful.",
-      youngOld: "Puppies and seniors tire sooner: shorten the walk.",
-      heavy: "With a coat that thick, heat hits harder: pick cooler hours.",
-      smallShort: "Small or short-coated dogs feel the cold and the pavement more: shorten it if you need to.",
-    },
     exercise: {
       green: "A good time to run or play. Bring water and take breaks.",
       yellow: "Run at an easy pace, and for less time. Take breaks in the shade.",
@@ -79,12 +66,6 @@ export const adviceCopy = {
     },
   },
 } as const;
-
-export type SpokenAdvice = {
-  title: string;
-  tip: string;
-  dogLine: string | null;
-};
 
 type Situation = "green" | "yellow" | "heatRed" | "cold" | "coldHard";
 
@@ -111,18 +92,4 @@ export function exerciseCopy(lang: Lang, result: RiskResult): { title: string; t
   const copy = adviceCopy[lang];
   const situation = sportSituation(result);
   return { title: copy[situation].title, tip: copy.exercise[situation] };
-}
-
-export function spokenAdvice(lang: Lang, result: RiskResult, dog: DogKind): SpokenAdvice {
-  const copy = adviceCopy[lang];
-  const heat = result.band !== "cold";
-  const situation = copy[sportSituation(result)];
-
-  let dogLine: string | null = null;
-  if (dog === "youngOld") dogLine = copy.dog.youngOld;
-  else if (dog === "smallShort") dogLine = copy.dog.smallShort;
-  else if (heat && dog === "brachy") dogLine = copy.dog.brachy;
-  else if (heat && dog === "heavy") dogLine = copy.dog.heavy;
-
-  return { title: situation.title, tip: situation.tip, dogLine };
 }

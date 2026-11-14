@@ -4,25 +4,25 @@ import type { DogKind } from "./storage.ts";
 export type Lang = "es" | "en";
 
 export type DogOption = {
-  id: DogKind;
+  id: Exclude<DogKind, "normal">;
   title: string;
-  detail: string;
+  examples: string;
+  tip: string;
 };
 
+/** Reference tips by dog type, shown only on the Razas tab. */
 const dogs: Record<Lang, readonly DogOption[]> = {
   es: [
-    { id: "normal", title: "Normal", detail: "Adulto, sano, de tamaño común." },
-    { id: "brachy", title: "Hocico corto", detail: "Bulldog, pug, boxer, shih tzu." },
-    { id: "youngOld", title: "Cachorro o mayor", detail: "Se cansa y se enfría más fácil." },
-    { id: "heavy", title: "Pelo largo y denso", detail: "Husky, chow, san bernardo." },
-    { id: "smallShort", title: "Chico o pelo corto", detail: "Chihuahua, galgo, whippet." },
+    { id: "brachy", title: "Hocico corto", examples: "Bulldog, pug, boxer, shih tzu.", tip: "Sufren más el calor: sé más prudente en días cálidos." },
+    { id: "youngOld", title: "Cachorro o mayor", examples: "Se cansa y se enfría más fácil.", tip: "Se cansan antes: acortá el paseo." },
+    { id: "heavy", title: "Pelo largo y denso", examples: "Husky, chow, san bernardo.", tip: "Con tanto pelo, el calor le pega más: buscá horas frescas." },
+    { id: "smallShort", title: "Chico o pelo corto", examples: "Chihuahua, galgo, whippet.", tip: "Sienten más el frío y el piso: acortá si hace falta." },
   ],
   en: [
-    { id: "normal", title: "Typical", detail: "Healthy adult, ordinary size." },
-    { id: "brachy", title: "Short muzzle", detail: "Bulldog, pug, boxer, shih tzu." },
-    { id: "youngOld", title: "Puppy or senior", detail: "Tires and chills more easily." },
-    { id: "heavy", title: "Thick coat", detail: "Husky, chow, Saint Bernard." },
-    { id: "smallShort", title: "Small or short coat", detail: "Chihuahua, greyhound, whippet." },
+    { id: "brachy", title: "Short muzzle", examples: "Bulldog, pug, boxer, shih tzu.", tip: "They suffer more in the heat: be more careful on warm days." },
+    { id: "youngOld", title: "Puppy or senior", examples: "Tires and chills more easily.", tip: "They tire sooner: shorten the walk." },
+    { id: "heavy", title: "Thick coat", examples: "Husky, chow, Saint Bernard.", tip: "With a coat that thick, heat hits harder: pick cooler hours." },
+    { id: "smallShort", title: "Small or short coat", examples: "Chihuahua, greyhound, whippet.", tip: "They feel the cold and the pavement more: shorten it if you need to." },
   ],
 };
 
@@ -57,13 +57,12 @@ const ui = {
     humidity: "Humedad",
     feels: "Para tu perro",
     tabs: { now: "Ahora", dog: "Razas", sources: "Fuentes" },
-    dogLead: "Elegí uno. Cambia el consejo de Ahora.",
-    dogFor: "Consejo para este perro.",
+    dogLead: "Algunos perros sienten más el calor o el frío.",
     paseo: "Paseo",
     ejercicio: "Ejercicio",
     sourcesLead: "Paseo y ejercicio no usan la misma regla. El texto de las tarjetas es nuestro.",
     sourcesNote: "No reemplaza a tu veterinario.",
-    iconCredit: "Íconos: Font Awesome Free, licencia CC BY 4.0.",
+    iconCredit: "Íconos de Font Awesome Free, CC BY 4.0.",
     groupWeather: "Clima",
     groupWalk: "Paseo",
     groupSport: "Ejercicio",
@@ -97,13 +96,12 @@ const ui = {
     humidity: "Humidity",
     feels: "For your dog",
     tabs: { now: "Now", dog: "Dog", sources: "Sources" },
-    dogLead: "Pick one. It changes the advice on Now.",
-    dogFor: "Advice for this dog.",
+    dogLead: "Some dogs feel heat or cold more than others.",
     paseo: "Walk",
     ejercicio: "Exercise",
     sourcesLead: "Walks and exercise don’t use the same rule. The card text is ours.",
     sourcesNote: "This doesn’t replace your vet.",
-    iconCredit: "Icons: Font Awesome Free, CC BY 4.0.",
+    iconCredit: "Icons from Font Awesome Free, CC BY 4.0.",
     groupWeather: "Weather",
     groupWalk: "Walk",
     groupSport: "Exercise",
