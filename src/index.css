@@ -343,8 +343,10 @@ a.row + a.row {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  margin: 0 -16px;
-  padding: 0 16px 8px;
+  margin-inline: -16px;
+  padding-inline: 16px;
+  padding-bottom: 8px;
+  scroll-padding-inline: 16px;
   scroll-snap-type: x mandatory;
 }
 
