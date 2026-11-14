@@ -33,7 +33,7 @@ const shortLevel: Record<Lang, Record<Level, string>> = {
 
 const ui = {
   es: {
-    app: "¿Salimos?",
+    app: "Salimos?",
     langSwitch: "EN",
     langLabel: "Cambiar a inglés",
     themeToLight: "Usar tema claro",

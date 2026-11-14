@@ -1,4 +1,4 @@
-# ¿Salimos?
+# Salimos?
 
 A small, mobile-first check for dog owners: is a long walk or a dog sport a bad idea in this weather?
 
